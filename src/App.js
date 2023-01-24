@@ -23,14 +23,14 @@ function App() {
       <Box sx={{ height: "100%" }}>
         <Routes>
           <Route path="/" element={token? <Home/> : <Login/>} />
-          <Route path="/addBook" element={<AddBook />} />
-          <Route path="/addAuthor" element={<AddAthor />} />
+          <Route path="/addBook" element={ token? <AddBook /> : <Login/>} />
+          <Route path="/addAuthor" element={token?  <AddAthor />: <Login/>} />
           <Route path="/login" element={<Login />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/author/:id/" element={<Author />} />
-          <Route path="/singlebook/:id/:ganreId" element={<SingleBook />} />
+          <Route path="/book" element={token ? <Book /> : <Login/>} />
+          <Route path="/author/:id/" element={token?  <Author /> : <Login/>} />
+          <Route path="/singlebook/:id/:ganreId" element={token?  <SingleBook /> : <Login/>} />
           <Route path="/register" element={<Register />} />
-          <Route path="/setting/*" element={<Setting />} />
+          <Route path="/setting/*" element={token?  <Setting />: <Login/>} />
         </Routes>
       </Box>
     </>
