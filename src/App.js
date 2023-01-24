@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Box } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import GlobalStyled from "./assests/style/GlobalStyle";
+import { AddAthor } from "./pages/AddAuthor/AddAuthor";
+import { AddBook } from "./pages/AddBook/AddBook";
+import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
+import { Setting } from "./pages/Setting/Setting";
+import "../src/assests/style/Carusel.css";
+import { Book } from "./pages/Book/Book";
+import { Author } from "./pages/Author/Author";
+import { SingleBook } from "./pages/singleBook/SingleBook";
+import { useSelector } from "react-redux";
 function App() {
+  const state = useSelector(state => state);
+
+  const token=state.token.token
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyled />
+      <Box sx={{ height: "100%" }}>
+        <Routes>
+          <Route path="/" element={token? <Home/> : <Login/>} />
+          <Route path="/addBook" element={<AddBook />} />
+          <Route path="/addAuthor" element={<AddAthor />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/author/:id/" element={<Author />} />
+          <Route path="/singlebook/:id/:ganreId" element={<SingleBook />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/setting/*" element={<Setting />} />
+        </Routes>
+      </Box>
+    </>
   );
 }
 
